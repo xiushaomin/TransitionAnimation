@@ -50,7 +50,31 @@
 }
 
 - (void) _doPresentAnimation:(id <UIViewControllerContextTransitioning>) transitionContext{
+    UIViewController *fromViewVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toViewVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIView *animationView = [fromViewVc.view snapshotViewAfterScreenUpdates:NO];
+    animationView.frame = fromViewVc.view.frame;
+    fromViewVc.view.hidden = YES;
+    UIView *containerView = [transitionContext containerView];
+    [containerView addSubview:animationView];
+    [containerView addSubview:toViewVc.view];
     
+    toViewVc.view.frame = (CGRect) {0 , containerView.frame.size.height, containerView.frame.size.width, 300};
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0 usingSpringWithDamping:0.55 initialSpringVelocity:1.0/0.55 options:0 animations:^{
+        
+        toViewVc.view.transform = CGAffineTransformMakeTranslation(0, - 300);
+        //然后让截图视图缩小一点即可
+        animationView.transform = CGAffineTransformMakeScale(0.85, 0.85);
+    } completion:^(BOOL finished) {
+        
+        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        
+        if ([transitionContext transitionWasCancelled]) {
+            fromViewVc.view.hidden = NO;
+            [animationView removeFromSuperview];
+        }
+        
+    }];
 }
 
 - (void) _doDismissAnimation:(id <UIViewControllerContextTransitioning>) transitionContext {
