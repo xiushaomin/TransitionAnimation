@@ -63,16 +63,16 @@
     [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0 usingSpringWithDamping:0.55 initialSpringVelocity:1.0/0.55 options:0 animations:^{
         
         toViewVc.view.transform = CGAffineTransformMakeTranslation(0, - 300);
-        //然后让截图视图缩小一点即可
         animationView.transform = CGAffineTransformMakeScale(0.85, 0.85);
     } completion:^(BOOL finished) {
-        
+        /*
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         
         if ([transitionContext transitionWasCancelled]) {
             fromViewVc.view.hidden = NO;
             [animationView removeFromSuperview];
         }
+         */
         
     }];
 }
