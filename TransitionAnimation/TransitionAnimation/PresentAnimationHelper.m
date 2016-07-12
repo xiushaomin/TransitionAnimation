@@ -65,14 +65,14 @@
         toViewVc.view.transform = CGAffineTransformMakeTranslation(0, - 300);
         animationView.transform = CGAffineTransformMakeScale(0.85, 0.85);
     } completion:^(BOOL finished) {
-        /*
+        
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         
         if ([transitionContext transitionWasCancelled]) {
             fromViewVc.view.hidden = NO;
             [animationView removeFromSuperview];
         }
-         */
+         
         
     }];
 }
@@ -87,17 +87,15 @@
         fromViewVc.view.transform = CGAffineTransformIdentity;
         animationView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
-        /*
+       
         if ([transitionContext transitionWasCancelled]) {
-            //失败了接标记失败
             [transitionContext completeTransition:NO];
         }else{
-            //如果成功了，我们需要标记成功，同时让vc1显示出来，然后移除截图视图，
             [transitionContext completeTransition:YES];
             toViewVc.view.hidden = NO;
             [animationView removeFromSuperview];
         }
-        */
+       
     }];
     
     

@@ -25,6 +25,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.bounds = (CGRect) {0, 0, 100, 100};
+    button.backgroundColor = [UIColor blueColor];
+    button.center = CGPointMake(self.view.center.x, self.view.center.y / 2);
+    button.userInteractionEnabled = YES;
+    self.view.userInteractionEnabled = YES;
+    [button addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    [self.view bringSubviewToFront:button];
+}
+
+- (void)clicked{
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (nullable id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
     
