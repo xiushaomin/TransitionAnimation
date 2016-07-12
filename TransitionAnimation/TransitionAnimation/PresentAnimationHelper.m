@@ -77,7 +77,29 @@
     }];
 }
 
-- (void) _doDismissAnimation:(id <UIViewControllerContextTransitioning>) transitionContext {
+- (void)_doDismissAnimation:(id <UIViewControllerContextTransitioning>) transitionContext {
+    UIViewController *fromViewVc = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toViewVc = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    UIView *containerView = [transitionContext containerView];
+    NSArray *subviewsArray = containerView.subviews;
+    UIView *animationView = subviewsArray[MIN(subviewsArray.count, MAX(0, subviewsArray.count - 2))];
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+        fromViewVc.view.transform = CGAffineTransformIdentity;
+        animationView.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        /*
+        if ([transitionContext transitionWasCancelled]) {
+            //失败了接标记失败
+            [transitionContext completeTransition:NO];
+        }else{
+            //如果成功了，我们需要标记成功，同时让vc1显示出来，然后移除截图视图，
+            [transitionContext completeTransition:YES];
+            toViewVc.view.hidden = NO;
+            [animationView removeFromSuperview];
+        }
+        */
+    }];
+    
     
 }
 @end
